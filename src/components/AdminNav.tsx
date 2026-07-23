@@ -22,9 +22,14 @@ export default function AdminNav() {
               New post
             </Link>
             {session.user.role === "admin" && (
-              <Link href="/admin/team" className="text-muted hover:text-paper">
-                Team
-              </Link>
+              <>
+                <Link href="/admin/members" className="text-muted hover:text-paper">
+                  People
+                </Link>
+                <Link href="/admin/team" className="text-muted hover:text-paper">
+                  Team
+                </Link>
+              </>
             )}
             <span className="text-marigold">{session.user.name}</span>
             <button

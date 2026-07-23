@@ -12,7 +12,7 @@ import {
   Sprout,
   Users,
 } from "lucide-react";
-import { volunteers } from "@/lib/volunteers";
+import { prisma } from "@/lib/prisma";
 
 export const metadata: Metadata = {
   title: "Volunteer | Karma",
@@ -59,7 +59,12 @@ function initials(name: string) {
     .toUpperCase();
 }
 
-export default function VolunteerPage() {
+export default async function VolunteerPage() {
+  const volunteers = await prisma.member.findMany({
+    where: { type: "VOLUNTEER", visible: true },
+    orderBy: [{ sortOrder: "asc" }, { name: "asc" }],
+  });
+
   return (
     <>
       <section className="mx-auto max-w-6xl px-6 py-16 md:py-24">
@@ -134,9 +139,9 @@ export default function VolunteerPage() {
                     </div>
                   </div>
 
-                  {volunteer.quote && (
+                  {volunteer.bio && (
                     <p className="mt-5 text-sm leading-relaxed text-slate-600">
-                      &ldquo;{volunteer.quote}&rdquo;
+                      &ldquo;{volunteer.bio}&rdquo;
                     </p>
                   )}
 

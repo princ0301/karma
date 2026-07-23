@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { Mail, MapPin } from "lucide-react";
-import { teamMembers } from "@/lib/team";
+import { prisma } from "@/lib/prisma";
 
 export const metadata: Metadata = {
   title: "About | Karma",
@@ -33,7 +33,12 @@ function initials(name: string) {
     .toUpperCase();
 }
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const teamMembers = await prisma.member.findMany({
+    where: { type: "TEAM", visible: true },
+    orderBy: [{ sortOrder: "asc" }, { name: "asc" }],
+  });
+
   return (
     <div className="mx-auto max-w-4xl px-6 py-16 md:py-24">
       <p className="font-mono text-xs uppercase tracking-[0.2em] text-marigold">
@@ -108,7 +113,9 @@ export default function AboutPage() {
             <p className="mt-1 font-mono text-xs uppercase tracking-wide text-marigold">
               {member.role}
             </p>
-            <p className="mt-4 text-sm leading-relaxed text-muted">{member.bio}</p>
+            {member.bio && (
+              <p className="mt-4 text-sm leading-relaxed text-muted">{member.bio}</p>
+            )}
             <div className="mt-5 flex flex-wrap gap-x-4 gap-y-2 text-xs text-muted">
               {member.city && (
                 <span className="flex items-center gap-1.5">
