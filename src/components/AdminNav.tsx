@@ -26,6 +26,9 @@ export default function AdminNav() {
                 <Link href="/admin/members" className="text-muted hover:text-paper">
                   People
                 </Link>
+                <Link href="/admin/programs" className="text-muted hover:text-paper">
+                  Programs
+                </Link>
                 <Link href="/admin/team" className="text-muted hover:text-paper">
                   Team
                 </Link>

@@ -49,6 +49,20 @@ model Post {
   author    User     @relation(fields: [authorId], references: [id])
 }
 
+model UpcomingProgram {
+  id              String   @id @default(cuid())
+  title           String
+  description     String
+  startsAt        DateTime
+  endsAt          DateTime?
+  location        String?
+  image           String?
+  registrationUrl String?
+  published       Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
 enum MemberType {
   TEAM
   VOLUNTEER
