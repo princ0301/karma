@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import CauseCard from "@/components/CauseCard";
 import { causes } from "@/lib/causes";
 import Link from "next/link";
@@ -12,16 +13,29 @@ export const metadata: Metadata = {
 export default function ProgramsPage() {
   return (
     <div className="mx-auto max-w-6xl px-6 py-16 md:py-24">
-      <p className="font-mono text-xs uppercase tracking-[0.2em] text-marigold">
-        Programs
-      </p>
-      <h1 className="mt-4 max-w-2xl font-display text-4xl leading-tight text-paper md:text-5xl">
-        Four causes we return to, again and again.
-      </h1>
-      <p className="mt-5 max-w-xl text-sm leading-relaxed text-muted md:text-base">
-        Each program is run with local partners and volunteers, shaped by
-        what each community tells us it needs most.
-      </p>
+      <div className="grid items-end gap-8 md:grid-cols-[1fr_0.9fr]">
+        <div>
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-marigold">
+            Programs
+          </p>
+          <h1 className="mt-4 max-w-2xl font-display text-4xl leading-tight text-paper md:text-5xl">
+            Four causes we return to, again and again.
+          </h1>
+          <p className="mt-5 max-w-xl text-sm leading-relaxed text-muted md:text-base">
+            Each program is run with local partners and volunteers, shaped by
+            what each community tells us it needs most.
+          </p>
+        </div>
+        <figure className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-white/10">
+          <Image
+            src="/images/K_4.jpeg"
+            alt="Children taking part in a Karma learning activity"
+            fill
+            sizes="(max-width: 768px) 100vw, 520px"
+            className="object-cover"
+          />
+        </figure>
+      </div>
 
       <div className="mt-14 grid gap-6 md:grid-cols-2">
         {causes.map((cause) => (

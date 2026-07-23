@@ -77,11 +77,6 @@ export default function DonatePage() {
           Contact us to donate
         </Link>
       </div>
-
-      <p className="mt-8 text-xs text-muted">
-        [Add your 12A / 80G registration details here so donors know
-        contributions may be tax-deductible, once available.]
-      </p>
     </div>
   );
 }

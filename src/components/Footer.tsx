@@ -48,12 +48,17 @@ export default function Footer() {
 
           <div>
             <p className="font-mono text-xs uppercase tracking-wide text-marigold">
-              Registration
+              Follow us
             </p>
-            <ul className="mt-3 space-y-2 text-sm text-muted">
-              <li>[Add 12A / 80G registration no.]</li>
-              <li>[Add NGO registration no.]</li>
-            </ul>
+            <a
+              href="https://www.instagram.com/karmaa5258/"
+              target="_blank"
+              rel="noreferrer"
+              className="mt-3 inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-paper"
+            >
+              <span aria-hidden="true" className="text-marigold">@</span>
+              KARMAA5258
+            </a>
           </div>
         </div>
 

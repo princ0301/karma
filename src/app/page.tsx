@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import RippleHero from "@/components/RippleHero";
 import CauseCard from "@/components/CauseCard";
 import { causes } from "@/lib/causes";
@@ -42,6 +43,49 @@ export default function Home() {
       </section>
 
       <section className="mx-auto max-w-6xl px-6 py-16 md:py-24">
+        <div className="grid items-center gap-8 md:grid-cols-[1.1fr_0.9fr] md:gap-14">
+          <div>
+            <p className="font-mono text-xs uppercase tracking-wide text-marigold">
+              In the community
+            </p>
+            <h2 className="mt-3 max-w-lg font-display text-3xl leading-tight text-paper md:text-4xl">
+              Joy, curiosity, and a place to grow.
+            </h2>
+            <p className="mt-5 max-w-xl text-sm leading-relaxed text-muted md:text-base">
+              Our work begins by showing up consistently: listening, learning,
+              and creating room for children and communities to lead the way.
+            </p>
+            <Link
+              href="/volunteer"
+              className="mt-7 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wide text-marigold hover:text-paper"
+            >
+              Meet our volunteers <ArrowRight size={14} />
+            </Link>
+          </div>
+          <div className="grid grid-cols-[1.1fr_0.9fr] gap-4">
+            <figure className="relative aspect-[4/5] overflow-hidden rounded-3xl border border-white/10">
+              <Image
+                src="/images/K_6.jpeg"
+                alt="Children celebrating together outdoors"
+                fill
+                sizes="(max-width: 768px) 60vw, 420px"
+                className="object-cover"
+              />
+            </figure>
+            <figure className="relative mt-10 aspect-[3/4] overflow-hidden rounded-3xl border border-white/10">
+              <Image
+                src="/images/K_5.jpeg"
+                alt="Karma volunteers and children sharing artwork"
+                fill
+                sizes="(max-width: 768px) 40vw, 320px"
+                className="object-cover"
+              />
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-6 py-16 md:py-24">
         <div className="flex items-end justify-between gap-6">
           <div>
             <p className="font-mono text-xs uppercase tracking-wide text-marigold">
@@ -68,26 +112,6 @@ export default function Home() {
 
       <section className="mx-auto max-w-6xl px-6">
         <div className="thread" />
-      </section>
-
-      <section className="mx-auto max-w-6xl px-6 py-16 md:py-24">
-        <div className="grid gap-10 md:grid-cols-3">
-          {[
-            { stat: "[00]", label: "Communities reached" },
-            { stat: "[00]", label: "Volunteers active" },
-            { stat: "[00]", label: "Years of work" },
-          ].map((item) => (
-            <div key={item.label}>
-              <p className="font-display text-4xl text-marigold">{item.stat}</p>
-              <p className="mt-2 font-mono text-xs uppercase tracking-wide text-muted">
-                {item.label}
-              </p>
-            </div>
-          ))}
-        </div>
-        <p className="mt-6 text-xs text-muted">
-          [Replace these placeholder figures with your real impact numbers.]
-        </p>
       </section>
 
       <section className="mx-auto max-w-6xl px-6 pb-24">

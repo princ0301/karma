@@ -49,7 +49,7 @@ export default async function AboutPage() {
         started with.
       </h1>
 
-      <div className="mt-12 grid gap-10 md:grid-cols-2">
+      <div className="mt-12 grid items-center gap-10 md:grid-cols-2">
         <div>
           <h2 className="font-display text-xl text-paper">Our story</h2>
           <p className="mt-3 text-sm leading-relaxed text-muted">
@@ -57,6 +57,15 @@ export default async function AboutPage() {
             tends to move outward, touching lives well beyond the one it was
             aimed at.
           </p>
+          <figure className="relative mt-8 aspect-[4/3] overflow-hidden rounded-3xl border border-white/10">
+            <Image
+              src="/images/K_3.jpeg"
+              alt="A Karma volunteer helping children with their learning"
+              fill
+              sizes="(max-width: 768px) 100vw, 448px"
+              className="object-cover"
+            />
+          </figure>
         </div>
         <div>
           <h2 className="font-display text-xl text-paper">Our mission</h2>
@@ -65,6 +74,15 @@ export default async function AboutPage() {
             life - education, health, livelihood, and environment - through
             programs that are practical, local, and built to last.
           </p>
+          <figure className="relative mt-8 aspect-[4/3] overflow-hidden rounded-3xl border border-white/10">
+            <Image
+              src="/images/K_4.jpeg"
+              alt="Children taking part in a Karma learning activity"
+              fill
+              sizes="(max-width: 768px) 100vw, 448px"
+              className="object-cover"
+            />
+          </figure>
         </div>
       </div>
 
@@ -82,6 +100,51 @@ export default async function AboutPage() {
           </div>
         ))}
       </div>
+
+      <section className="mt-16">
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p className="font-mono text-xs uppercase tracking-wide text-marigold">
+              In action
+            </p>
+            <h2 className="mt-2 font-display text-2xl text-paper">
+              The moments that move us forward
+            </h2>
+          </div>
+          <p className="max-w-sm text-sm leading-relaxed text-muted">
+            Learning, encouragement, and shared time shape every gathering.
+          </p>
+        </div>
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 md:grid-cols-[1.2fr_0.8fr_0.8fr]">
+          <figure className="relative aspect-[16/10] overflow-hidden rounded-3xl border border-white/10 sm:row-span-2 sm:aspect-auto">
+            <Image
+              src="/images/K_2.jpeg"
+              alt="Children and volunteers learning together in a park"
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 480px"
+              className="object-cover"
+            />
+          </figure>
+          <figure className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-white/10">
+            <Image
+              src="/images/K_4.jpeg"
+              alt="Children smiling during a Karma activity"
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 320px"
+              className="object-cover"
+            />
+          </figure>
+          <figure className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-white/10">
+            <Image
+              src="/images/K_5.jpeg"
+              alt="Children and volunteers displaying their artwork"
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 320px"
+              className="object-cover"
+            />
+          </figure>
+        </div>
+      </section>
 
       <div className="thread my-16" />
 
