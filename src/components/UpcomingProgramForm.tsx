@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { ChangeEvent, useState, useTransition } from "react";
+import { Loader2, Upload, X } from "lucide-react";
 
 type InitialValues = {
   title?: string;
@@ -24,6 +25,42 @@ export default function UpcomingProgramForm({
 }) {
   const [pending, startTransition] = useTransition();
   const [error, setError] = useState("");
+  const [imageUrl, setImageUrl] = useState(initial?.image ?? "");
+  const [uploading, setUploading] = useState(false);
+
+  async function handleImageUpload(event: ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    setError("");
+    setUploading(true);
+
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const response = await fetch("/api/admin/program-image", {
+        method: "POST",
+        body: formData,
+      });
+      const body = await response.json().catch(() => ({}));
+
+      if (!response.ok || !body.url) {
+        throw new Error(body.error || "Could not upload the image.");
+      }
+
+      setImageUrl(body.url);
+    } catch (uploadError) {
+      setError(
+        uploadError instanceof Error
+          ? uploadError.message
+          : "Could not upload the image."
+      );
+    } finally {
+      setUploading(false);
+      event.target.value = "";
+    }
+  }
 
   function handleSubmit(formData: FormData) {
     setError("");
@@ -109,15 +146,34 @@ export default function UpcomingProgramForm({
         </label>
       </div>
 
-      <label className="block font-mono text-xs uppercase tracking-wide text-muted">
-        Image path (optional)
+      <div className="font-mono text-xs uppercase tracking-wide text-muted">
+        Program image (optional)
         <input
-          name="image"
-          defaultValue={initial?.image ?? ""}
-          placeholder="/images/K_2.jpeg"
-          className="mt-2 w-full rounded-xl border border-white/10 bg-ink-soft px-4 py-3 text-sm normal-case text-paper outline-none focus:border-marigold"
+          type="file"
+          accept="image/jpeg,image/png,image/webp"
+          onChange={handleImageUpload}
+          disabled={uploading}
+          className="mt-2 block w-full cursor-pointer rounded-xl border border-dashed border-white/20 bg-ink-soft px-4 py-3 text-sm normal-case text-muted file:mr-4 file:rounded-full file:border-0 file:bg-marigold file:px-3 file:py-1.5 file:font-mono file:text-xs file:font-medium file:uppercase file:tracking-wide file:text-ink hover:border-marigold/60 disabled:cursor-not-allowed"
         />
-      </label>
+        <input type="hidden" name="image" value={imageUrl} />
+        {uploading && (
+          <span className="mt-2 flex items-center gap-2 text-xs text-marigold">
+            <Loader2 size={14} className="animate-spin" /> Uploading image...
+          </span>
+        )}
+        {imageUrl && !uploading && (
+          <span className="mt-2 flex items-center gap-2 text-xs text-marigold">
+            <Upload size={14} /> Image uploaded
+            <button
+              type="button"
+              onClick={() => setImageUrl("")}
+              className="flex items-center gap-1 hover:text-paper"
+            >
+              <X size={13} /> Remove
+            </button>
+          </span>
+        )}
+      </div>
 
       <label className="flex items-center gap-2 text-sm text-muted">
         <input

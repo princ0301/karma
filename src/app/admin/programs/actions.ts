@@ -40,8 +40,8 @@ function programData(formData: FormData) {
   if (endsAt && endsAt < startsAt) {
     throw new Error("End time must be after the start time.");
   }
-  if (image && !image.startsWith("/")) {
-    throw new Error("Use a local image path starting with /images/.");
+  if (image && !image.startsWith("/api/program-image?pathname=programs%2F")) {
+    throw new Error("Upload a program image using the image field.");
   }
   if (registrationUrl) {
     try {

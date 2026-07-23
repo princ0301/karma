@@ -9,6 +9,9 @@ const nextConfig = {
       {
         pathname: "/api/member-photo",
       },
+      {
+        pathname: "/api/program-image",
+      },
     ],
   },
 };
