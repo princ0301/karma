@@ -3,6 +3,7 @@
 import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { MemberType } from "@prisma/client";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
@@ -16,7 +17,8 @@ async function requireAdmin() {
 function memberData(formData: FormData) {
   const name = String(formData.get("name") || "").trim();
   const role = String(formData.get("role") || "").trim();
-  const type = formData.get("type") === "TEAM" ? "TEAM" : "VOLUNTEER";
+  const type: MemberType =
+    formData.get("type") === "TEAM" ? "TEAM" : "VOLUNTEER";
 
   if (!name || !role) {
     throw new Error("Name and role are required.");
@@ -31,6 +33,15 @@ function memberData(formData: FormData) {
     throw new Error("Enter valid joining and exit dates.");
   }
 
+  const sortOrderValue = String(formData.get("sortOrder") || "").trim();
+  const sortOrder = sortOrderValue ? Number(sortOrderValue) : undefined;
+  if (
+    sortOrder !== undefined &&
+    (!Number.isInteger(sortOrder) || sortOrder < 1)
+  ) {
+    throw new Error("Display order must be a whole number starting from 1.");
+  }
+
   return {
     name,
     role,
@@ -40,7 +51,7 @@ function memberData(formData: FormData) {
     city: String(formData.get("city") || "").trim() || null,
     bio: String(formData.get("bio") || "").trim() || null,
     visible: formData.get("visible") === "on",
-    sortOrder: Number(formData.get("sortOrder") || 0) || 0,
+    sortOrder,
     joinDate,
     exitDate,
   };
@@ -54,7 +65,17 @@ function revalidateMemberPages() {
 
 export async function createMemberAction(formData: FormData) {
   await requireAdmin();
-  await prisma.member.create({ data: memberData(formData) });
+  const data = memberData(formData);
+  const result = await prisma.member.aggregate({
+    _max: { sortOrder: true },
+  });
+
+  await prisma.member.create({
+    data: {
+      ...data,
+      sortOrder: data.sortOrder ?? (result._max.sortOrder ?? 0) + 1,
+    },
+  });
   revalidateMemberPages();
   redirect("/admin/members");
 }

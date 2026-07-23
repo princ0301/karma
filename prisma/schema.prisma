@@ -12,14 +12,9 @@ model User {
   name      String
   email     String   @unique
   password  String
-  role      String   @default("author") // "admin" or "author"
-  posts     Post[]
+  role      String   @default("author")
   createdAt DateTime @default(now())
-}
-
-enum MemberType {
-  TEAM
-  VOLUNTEER
+  posts     Post[]
 }
 
 model Member {
@@ -33,10 +28,10 @@ model Member {
   bio       String?
   visible   Boolean    @default(true)
   sortOrder Int        @default(0)
-  joinDate  DateTime   @default(now())
-  exitDate  DateTime?
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
+  exitDate  DateTime?
+  joinDate  DateTime   @default(now())
 }
 
 model Post {
@@ -44,12 +39,17 @@ model Post {
   slug      String   @unique
   title     String
   excerpt   String
-  content   String   @db.Text
+  content   String
   cover     String?
   tags      String[]
   published Boolean  @default(true)
-  author    User     @relation(fields: [authorId], references: [id])
   authorId  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  author    User     @relation(fields: [authorId], references: [id])
+}
+
+enum MemberType {
+  TEAM
+  VOLUNTEER
 }
