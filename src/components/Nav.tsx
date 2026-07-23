@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
@@ -17,8 +18,27 @@ export default function Nav() {
   return (
     <header className="sticky top-0 z-50 border-b border-white/[0.06] bg-ink/85 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <Link href="/" className="font-display text-xl tracking-tight text-paper">
-          Karma
+        <Link
+          href="/"
+          aria-label="Karma Educational and Charitable Society home"
+          className="flex shrink-0 items-center gap-3"
+        >
+          <Image
+            src="/images/logo.png"
+            alt="Karma Educational and Charitable Society"
+            width={80}
+            height={80}
+            priority
+            className="h-auto w-14 rounded-full object-cover"
+          />
+          <span className="hidden leading-tight sm:block">
+            <span className="block font-display text-lg tracking-tight text-paper">
+              Karma
+            </span>
+            <span className="block font-mono text-[9px] uppercase tracking-wide text-muted">
+              Educational &amp; Charitable Society
+            </span>
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">

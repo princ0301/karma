@@ -25,6 +25,11 @@ export const metadata: Metadata = {
   title: "Karma — Every act ripples forward",
   description:
     "Karma is a nonprofit working across education, health, livelihood, and environment — because one act of good reaches further than you think.",
+  icons: {
+    icon: "/images/logo.png",
+    shortcut: "/images/logo.png",
+    apple: "/images/logo.png",
+  },
 };
 
 export default function RootLayout({

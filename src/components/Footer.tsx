@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -6,7 +7,15 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl px-6 py-14">
         <div className="grid gap-10 md:grid-cols-4">
           <div>
-            <p className="font-display text-lg text-paper">Karma</p>
+            <Link href="/" aria-label="Karma home" className="inline-block">
+              <Image
+                src="/images/logo.png"
+                alt="Karma Educational and Charitable Society"
+                width={96}
+                height={96}
+                className="h-auto w-16 rounded-full object-cover"
+              />
+            </Link>
             <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted">
               Every act ripples forward. We work across education, health,
               livelihood, and environment.
