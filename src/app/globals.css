@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+:root {
+  --color-ink: #12172b;
+  --color-ink-soft: #191f3c;
+  --color-card: #1e2547;
+  --color-thread: rgba(242, 233, 228, 0.1);
+  --color-marigold: #f2a93b;
+  --color-marigold-soft: rgba(242, 169, 59, 0.14);
+  --color-rose: #e8654f;
+  --color-paper: #f4f0e6;
+  --color-muted: #9aa1c4;
+}
+
+@theme inline {
+  --color-ink: var(--color-ink);
+  --color-ink-soft: var(--color-ink-soft);
+  --color-card: var(--color-card);
+  --color-marigold: var(--color-marigold);
+  --color-marigold-soft: var(--color-marigold-soft);
+  --color-rose: var(--color-rose);
+  --color-paper: var(--color-paper);
+  --color-muted: var(--color-muted);
+  --font-display: var(--font-fraunces);
+  --font-body: var(--font-inter);
+  --font-mono: var(--font-jbmono);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+}
+
+.font-display {
+  font-family: var(--font-display), Georgia, serif;
+}
+
+.font-mono {
+  font-family: var(--font-mono), ui-monospace, monospace;
+}
+
+/* Thread divider: a signature hairline that carries a warm gradient,
+   used instead of plain borders to tie sections together like a
+   connecting thread. */
+.thread {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-thread) 15%,
+    var(--color-marigold) 50%,
+    var(--color-thread) 85%,
+    transparent 100%
+  );
+  opacity: 0.5;
+}
+
+.prose-blog {
+  color: var(--color-paper);
+}
+.prose-blog h2 {
+  font-family: var(--font-display), serif;
+  font-size: 1.5rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--color-paper);
+}
+.prose-blog h3 {
+  font-family: var(--font-display), serif;
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+.prose-blog p {
+  margin-bottom: 1.25rem;
+  line-height: 1.8;
+  color: var(--color-muted);
+}
+.prose-blog a {
+  color: var(--color-marigold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.prose-blog ul,
+.prose-blog ol {
+  margin: 0 0 1.25rem 1.25rem;
+  color: var(--color-muted);
+  line-height: 1.8;
+}
+.prose-blog ul {
+  list-style: disc;
+}
+.prose-blog blockquote {
+  border-left: 2px solid var(--color-marigold);
+  padding-left: 1.25rem;
+  font-style: italic;
+  color: var(--color-paper);
+  margin: 1.5rem 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+.ripple-ring {
+  animation: ripple 4s cubic-bezier(0.2, 0.6, 0.4, 1) infinite;
+}
